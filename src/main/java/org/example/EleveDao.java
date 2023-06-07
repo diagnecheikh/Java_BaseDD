@@ -47,13 +47,39 @@ public class EleveDao {
         }
     }
 
-    public void supprimerEleve(){
+    public void supprimerEleve(Eleve eleve) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/diagne37u_Java", "diagne37u_appli", "32216625");
 
-            PreparedStatement statement = con.prepareStatement("DELETE INTO televe(nom, prenom) VALUES (théo, Dupont));");
-            statement.setString(1,);
+            PreparedStatement statement = con.prepareStatement("DELETE FROM televe WHERE nom = ? AND prenom = ?;");
+            statement.setString(1, "cartonalo");
+            statement.setString(2, "fabio");
+            statement.executeUpdate();
+
+            con.close();
+        }
+        catch (Exception e){
+            System.out.println(e);
         }
     }
+    public void modifierEleve(Eleve eleve) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://devbdd.iutmetz.univ-lorraine.fr:3306/diagne37u_Java", "diagne37u_appli", "32216625");
+
+            PreparedStatement statement = con.prepareStatement("UPDATE televe SET nom = ?, prenom = ? WHERE nom = ? AND prenom = ?;");
+            statement.setString(1, "diagne");
+            statement.setString(2, "mamadou");
+            statement.setString(3, "cartonalo");
+            statement.setString(4, "fabio");
+            statement.executeUpdate();
+
+            con.close();
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
 }
